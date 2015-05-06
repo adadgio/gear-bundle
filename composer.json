@@ -10,8 +10,9 @@
             "email": "romain.bruckert.esc@gmail.com"
         }
     ],
-    "autoload": {
-        "psr-0": { "Adadgio\\Bundle\\RocketBundle": "" }
-    },
-    "target-dir": "Adadgio/Bundle/RocketBundle"
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "~2.3",
+        "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+    }
 }
