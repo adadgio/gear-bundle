@@ -1,0 +1,17 @@
+{
+    "name": "adadgio/rocket-bundle",
+    "description": "This Bundle give a lot of simple or advanced cool utilities",
+    "keywords": [],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Romain Bruckert",
+            "email": "romain.bruckert.esc@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Adadgio\\Bundle\\RocketBundle": "" }
+    },
+    "target-dir": "Adadgio/Bundle/RocketBundle",
+}
