@@ -13,5 +13,5 @@
     "autoload": {
         "psr-0": { "Adadgio\\Bundle\\RocketBundle": "" }
     },
-    "target-dir": "Adadgio/Bundle/RocketBundle",
+    "target-dir": "Adadgio/Bundle/RocketBundle"
 }
