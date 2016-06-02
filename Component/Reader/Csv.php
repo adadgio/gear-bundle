@@ -1,10 +1,11 @@
 <?php
 
-namespace Adadgio\GearBundle\Component\Parser\Csv;
+namespace Adadgio\GearBundle\Component\Reader;
 
+use Adadgio\GearBundle\Component\Reader\ReaderInterface;
 use Adadgio\GearBundle\Exception\GearException;
 
-class Csv
+class Csv implements ReaderInterface
 {
     /**
      * @var string CSV fgets delimiter
@@ -30,9 +31,14 @@ class Csv
     public function __construct($csvfile)
     {
         $this->delimiter = "\t";
-        $this->csvfile = $csvfile;
-    }
 
+        if (is_file($csvfile)) {
+            $this->csvfile = $csvfile;
+        } else {
+            throw new GearException('File not found "%s"', $csvfile);
+        }
+    }
+    
     /**
      * Get parsed data.
      *
