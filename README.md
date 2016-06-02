@@ -15,9 +15,9 @@ $data = $csv
 ```
 
 ## Entity hydration from data
-
+<sub>
 ```php
-<sub>use Adadgio\GearBundle\Component\Hydration\EntityHydrator;
+use Adadgio\GearBundle\Component\Hydration\EntityHydrator;
 
 $hydrator = new EntityHydrator();
 
@@ -28,5 +28,6 @@ $hydrator
 	->map(0, 'id') // map array column index to entity property
 	->map(1, 'name');
 
-$entities = $hydrator->getEntities();</sub>
+$entities = $hydrator->getEntities();
 ```
+</sub>
