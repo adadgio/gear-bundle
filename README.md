@@ -3,7 +3,9 @@
 
 ## CSV reader
 
-```
+```php
+use Adadgio\GearBundle\Component\Reader\Csv;
+
 $csv = new Csv('data/test.csv');
 
 $data = $csv
@@ -14,8 +16,8 @@ $data = $csv
 
 ## Entity hydration from data
 
-```
-use Adadgio\GearBundle\Component\Hydration\EntityHydrator;
+```php
+<font>use Adadgio\GearBundle\Component\Hydration\EntityHydrator;
 
 $hydrator = new EntityHydrator();
 
@@ -28,5 +30,4 @@ $hydrator
 	->map(1, 'name');
 
 $entities = $hydrator->getEntities();
-
 ```
