@@ -51,12 +51,9 @@ $payload->setParameter('my_name', 'Romain'); // nb: 3 params are here by default
 
 // use the connector to start (trigger) the loop
 $this->get('adadgio_gear.nodered.connector')->send('POST', '/adadgio/gear/loop/start', $payload); // @todo pass this more transparently
-
-// the loop will never stop until you change the payload **kill** property
-$payload->kill();
 ```
 
-Listen to the loop callbacks. Nodered will indefinitaly call it unless you `kill` the payload.
+The loop will never stop until you change the payload **kill** property. Now **listen** to the loop callbacks. Nodered will indefinitaly call it unless you `kill` the payload.
 
 ```php
 // in some listener, far, far away, a long long time ago
