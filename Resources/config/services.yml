@@ -1,0 +1,5 @@
+services:
+    adadgio_gear.nodered.connector:
+        class:     Adadgio\GearBundle\Connector\NodeRed\NodeRedConnector
+        arguments:
+            - "%adadgio_gear.nodered%"

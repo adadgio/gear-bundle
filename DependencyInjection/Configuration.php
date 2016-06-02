@@ -22,6 +22,22 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('nodered')
+                    ->children()
+                        ->scalarNode('host')->isRequired()->end()
+                        ->scalarNode('port')->defaultValue(1880)->end()
+                        ->scalarNode('protocol')->defaultValue('http://')->end()
+                        ->arrayNode('http_auth')
+                            ->children()
+                                ->scalarNode('user')->defaultValue(null)->end()
+                                ->scalarNode('pass')->defaultValue(null)->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }

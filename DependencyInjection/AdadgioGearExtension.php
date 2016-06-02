@@ -23,5 +23,26 @@ class AdadgioGearExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
+
+        // set all bundle parameters from configuration values
+        $this->setBundleParameters($container, $config);
+    }
+
+    /**
+     * Set container parameters
+     *
+     * @param object Container
+     * @param array  Bundle config
+     */
+    private function setBundleParameters($container, array $config)
+    {
+        $container->setParameter('adadgio_gear.nodered', $config['nodered']);
+        
+        // set all NodeRed parameters
+        foreach ($config['nodered'] as $key => $value) {
+            $name = sprintf('adadgio_gear.nodered.%s', $key);
+            $container->setParameter($name, $value);
+        }
     }
 }

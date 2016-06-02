@@ -1,5 +1,20 @@
 # AdadgioGearBundle
 
+# Installation
+
+If you want to use NodeRed connectors, loops and flows
+
+```
+// import routing
+_adadgio_gear:
+    resource: "@AdadgioGearBundle/Resources/config/routing.yml"
+```
+
+```
+// in config.yml
+
+
+```
 
 ## CSV reader
 
