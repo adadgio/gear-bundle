@@ -1,7 +1,7 @@
 {
     "name": "adadgio/rocket-bundle",
-    "description": "This Bundle give a lot of simple or advanced cool utilities",
-    "keywords": [],
+    "description": "A lot of cool utilities and connectors",
+    "description": "Adadgio RocketBundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
