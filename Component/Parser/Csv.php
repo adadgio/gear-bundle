@@ -7,12 +7,6 @@ use Adadgio\GearBundle\Exception\GearException;
 class Csv
 {
     /**
-     * Types of input for the constructor
-     */
-    const RAW_INPUT = null;
-    const FILE_INPUT = 'FILE_INPUT';
-
-    /**
      * @var string CSV fgets delimiter
      */
     protected $delimiter;
@@ -48,7 +42,7 @@ class Csv
     {
         return $this->data;
     }
-    
+
     /**
      * Set fgetscsv delimiter.
      *
