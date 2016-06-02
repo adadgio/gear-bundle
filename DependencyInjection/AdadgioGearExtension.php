@@ -1,6 +1,6 @@
 <?php
 
-namespace Adadgio\RocketBundle\DependencyInjection;
+namespace Adadgio\GearBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class AdadgioRocketExtension extends Extension
+class AdadgioGearExtension extends Extension
 {
     /**
      * {@inheritdoc}
