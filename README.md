@@ -58,8 +58,6 @@ The loop will never stop until you change the payload **kill** property. Now **l
 ```php
 // in some listener, far, far away, a long long time ago
 // the listener must listen to "adadgio_gear.nodered.payload_received"
-
-//...
 public function onPayloadReceived(\Adadgio\GearBundle\Connector\NodeRed\Event\PaylaodEvent $event)
 {
     // you might need the request, who knows
