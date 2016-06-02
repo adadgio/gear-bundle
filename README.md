@@ -29,8 +29,11 @@ Then you need to install the flows in your NodeRed app.
 
 ```bash
 $ php app/console adadgio:nodered:install --output=/destination/folder
-// you need to manually import the flows in your NodeRed app (or use flows directory config in NodeRed settings.js)
 ```
+
+You will need to manually import the flows in your NodeRed app (or use flows directory config in NodeRed settings.js).
+
+![alt tag](https://raw.githubusercontent.com/adadgio/gear-bundle/master/Resources/help/nodered_flow.png)
 
 ### Usage
 
