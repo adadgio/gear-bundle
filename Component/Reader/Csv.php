@@ -38,7 +38,17 @@ class Csv implements ReaderInterface
             throw new GearException('File not found "%s"', $csvfile);
         }
     }
-    
+
+    /**
+     * Get data rows count.
+     *
+     * @return integer
+     */
+    public function countRows()
+    {
+        return count($this->data);
+    }
+
     /**
      * Get parsed data.
      *
@@ -64,8 +74,12 @@ class Csv implements ReaderInterface
 
     /**
      * Reads from the input optionaly with a limit and offset
+     *
+     * @param  integer Skip a number of rows (if X, x not included in result set)
+     * @param  integer Limit number of rows that should be returned
+     * @return object \CSv
      */
-    public function read($offset = null, $limit = null)
+    public function read($skip = null, $limit = null)
     {
         $handle = fopen($this->csvfile, 'r');
         if (!$handle) { return $this; }
@@ -77,13 +91,13 @@ class Csv implements ReaderInterface
 
         while (($cells = fgetcsv($handle, 0, $this->delimiter)) !== false) {
             // handle the offset
-            if(null !== $offset && $counter < $offset) {
+            if(null !== $skip && $counter < $skip) {
                 $counter++;
                 continue;
             }
 
             // handle the limit
-            if (null !== $limit && $total > $limit) {
+            if (null !== $limit && $total > ($limit-1)) {
                 break;
             }
 
@@ -105,7 +119,7 @@ class Csv implements ReaderInterface
 
         // close file handle
         fclose($handle);
-
+        
         return $this;
     }
 }

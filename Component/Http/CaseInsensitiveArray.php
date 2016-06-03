@@ -1,6 +1,6 @@
 <?php
 
-namespace Adadgio\GearBundle\Common\Http;
+namespace Adadgio\GearBundle\Component\Http;
 
 class CaseInsensitiveArray implements \ArrayAccess, \Countable, \Iterator
 {

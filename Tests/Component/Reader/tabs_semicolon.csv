@@ -1,0 +1,78 @@
+A009;Cholera, sans precision
+A010;Fievre typhoede
+A011;Paratyphoede A
+A012;Paratyphoede B
+A013;Paratyphoede C
+A020;Enterite e Salmonella
+A021;Septicemie e Salmonella
+A028;Autres infections precisees e Salmonella
+A029;Salmonellose, sans precision
+A032;Shigellose e Shigella boydii
+A033;Shigellose e Shigella sonnei
+A039;Shigellose, sans precision
+A041;Infection enterotoxigene e Escherichia coli
+A042;Infection entero-invasive e Escherichia coli
+A045;Enterite e Campylobacter
+A046;Enterite e Yersinia enterocolitica
+A047;Enterocolite e Clostridium difficile
+A061;Amibiase intestinale chronique
+A063;Amobome (de l'intestin)
+A065;Abces amibien du poumon (J99.8*)
+A067;Amibiase cutanee
+A070;Balantidiose
+A071;Giardiase [lambliase]
+A080;Enterite e rotavirus
+A084;Infections intestinales virales, sans precision
+A157;Primo-infection tuberculeuse de l'appareil respiratoire, avec confirmation bacteriologique et histologique
+A167;Primo-infection tuberculeuse de l'appareil respiratoire, (sans mention de confirmation bacteriologique ou histologique)
+A178;Autres formes de tuberculose du systeme nerveux
+A183;Tuberculose de l'intestin, du peritoine et des ganglions mesenteriques
+A192;Tuberculose miliaire aigue, sans precision
+A201;Peste cutanee
+A202;Peste pulmonaire
+A209;Peste, sans precision
+A211;Tularemie oculo-glandulaire
+A218;Autres formes de tularemie
+A220;Charbon cutane
+A228;Autres formes de charbon
+A233;Brucellose e Brucella canis
+A242;Melioedose subaigue et chronique
+A244;Melioedose, sans precision
+A251;Streptobacillose
+A269;erysipeloede, sans precision
+A279;Leptospirose, sans precision
+A304;Lepre lepromateuse de type intermediaire atypique
+A308;Autres formes de lepre
+A319;Infection e mycobacteries atypiques, sans precision
+A328;Autres formes de listeriose
+A33;Tetanos neonatal
+A361;Diphterie rhinopharyngee
+A369;Diphterie, sans precision
+A38;Scarlatine
+A392;Meningococcemie aigue
+A394;Meningococcemie, sans precision
+A408;Autres septicemies e streptocoques
+A411;Septicemie e d'autres staphylocoques precises
+A419;Septicemie, sans precision
+A420;Actinomycose pulmonaire
+A422;Actinomycose cervico-faciale
+A431;Nocardiose cutanee
+A439;Nocardiose, sans precision
+A46;erysipele
+A480;Gangrene gazeuse
+A488;Autres maladies bacteriennes precisees
+A498;Autres infections bacteriennes, siege non precise
+A501;Syphilis congenitale precoce, latente
+A509;Syphilis congenitale, sans precision
+A510;Syphilis genitale primaire
+A511;Syphilis anale primaire
+A513;Syphilis secondaire de la peau et des muqueuses
+A515;Syphilis precoce, latente
+A519;Syphilis precoce, sans precision
+A520;Syphilis cardio-vasculaire
+A523;Syphilis nerveuse, sans precision
+A528;Syphilis tardive, latente
+A529;Syphilis tardive, sans precision
+A530;Syphilis latente, (non precisee precoce ou tardive)
+A544;Infection gonococcique du systeme osteo-articulaire et des muscles
+A549;Infection gonococcique, sans precision

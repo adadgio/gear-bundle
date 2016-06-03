@@ -1,6 +1,6 @@
 <?php
 
-namespace Adadgio\GearBundle\Common\Http;
+namespace Adadgio\GearBundle\Component\Http;
 
 /**
  * Adapted from {@link https://github.com/php-curl-class/php-curl-class/tree/master/src/Curl}
@@ -110,7 +110,7 @@ class Curl
         $this->setOpt(CURLINFO_HEADER_OUT, true);
         $this->setOpt(CURLOPT_HEADERFUNCTION, array($this, 'headerCallback'));
         $this->setOpt(CURLOPT_RETURNTRANSFER, true);
-        $this->headers = new \Adadgio\GearBundle\Common\Http\CaseInsensitiveArray();
+        $this->headers = new CaseInsensitiveArray();
         $this->setURL($base_url);
         $this->rfc2616 = array_fill_keys(self::$RFC2616, true);
         $this->rfc6265 = array_fill_keys(self::$RFC6265, true);
@@ -352,7 +352,7 @@ class Curl
         }
         $this->responseHeaders = $this->parseResponseHeaders($this->rawResponseHeaders);
         list($this->response, $this->rawResponse) = $this->parseResponse($this->responseHeaders, $this->rawResponse);
-        
+
         $this->httpErrorMessage = '';
         if ($this->error) {
             if (isset($this->responseHeaders['Status-Line'])) {
@@ -945,8 +945,8 @@ class Curl
     private function parseHeaders($raw_headers)
     {
         $raw_headers = preg_split('/\r\n/', $raw_headers, null, PREG_SPLIT_NO_EMPTY);
-        $http_headers = new \Adadgio\GearBundle\Common\Http\CaseInsensitiveArray();
-
+        $http_headers = new CaseInsensitiveArray();
+        
         $raw_headers_count = count($raw_headers);
         for ($i = 1; $i < $raw_headers_count; $i++) {
             list($key, $value) = explode(':', $raw_headers[$i], 2);
@@ -971,7 +971,7 @@ class Curl
      */
     private function parseRequestHeaders($raw_headers)
     {
-        $request_headers = new \Adadgio\GearBundle\Common\Http\CaseInsensitiveArray();
+        $request_headers = new CaseInsensitiveArray();
         list($first_line, $headers) = $this->parseHeaders($raw_headers);
         $request_headers['Request-Line'] = $first_line;
         foreach ($headers as $key => $value) {
@@ -1025,7 +1025,7 @@ class Curl
             }
         }
 
-        $response_headers = new \Adadgio\GearBundle\Common\Http\CaseInsensitiveArray();
+        $response_headers = new CaseInsensitiveArray();
         list($first_line, $headers) = $this->parseHeaders($response_header);
         $response_headers['Status-Line'] = $first_line;
         foreach ($headers as $key => $value) {

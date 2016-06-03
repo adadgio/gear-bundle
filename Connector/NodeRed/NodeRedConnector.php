@@ -3,7 +3,7 @@
 namespace Adadgio\GearBundle\Connector\NodeRed;
 
 use Symfony\Component\HttpFoundation\Request;
-use Adadgio\GearBundle\Common\Http\Curl;
+use Adadgio\GearBundle\Component\Http\Curl;
 use Adadgio\GearBundle\Exception\GearException;
 
 class NodeRedConnector
@@ -91,7 +91,7 @@ class NodeRedConnector
                 throw new \GearException('Cannot create \Payload from request, must be POST or GET, "%s" given', $method);
             break;
         }
-        
+
         return new Payload($data);
     }
 
