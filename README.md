@@ -2,9 +2,66 @@
 
 # Installation
 
+## Api annotations and auth
+
+Its very easy to create API endpoints and secure them through any kind of authentication system.
+
+### Configuration
+
+```yaml
+// in config.yml (basic auth example)
+adadgio_gear:
+    auth:
+        type: Basic     # options: Basic (more default types not available in current version)
+        class: ~        # either define "class" or "provider", ex. "Adadgio\GearBundle\Component\Api\Authenticatir\AuthProvider"
+        #provider: ~    # either define "class" or "provider", ex. "adadgio_gear.api.authenticator_example_service"
+        user: benny
+        password: test
+
+// in config.yml (custom service auth example, like API client in database)
+adadgio_gear:
+    auth:
+        #type: ~        
+        #class: ~       # either define "class" or "provider", ex. "Adadgio\GearBundle\Component\Api\Authenticatir\AuthProvider"
+        provider: my_bundle.api.my_client_auth  # you create the service and define what to do: see "adadgio_gear.api.authenticator_example_service"
+```
+
+Example using custom authenticator service.
+
+```php
+use Adadgio\GearBundle\Component\Api\Authenticator\AuthProvider;
+use Adadgio\GearBundle\Component\Api\Authenticator\AuthProviderInterface;
+
+class ExampleAuthProviderService extends AuthProvider implements AuthProviderInterface
+{
+    /**
+     * Build your service like you build services every day!
+     */
+    public function __construct()
+    {
+        // inject anything in here, like doctrien.orm.entity_manager, or whatever.
+    }
+
+    /**
+     * Checks auth. You could get request headers key and check that
+     * the secret key and client id are in your database for example...
+     *
+     * @return boolean
+     */
+    public function authenticate()
+    {
+        // your owns logic here
+        $request = $this->getRequest();
+        $headers = $request->getHeaders();
+
+        return true;
+    }
+}
+```
+
 ## NodeRed connector(s) and loops
 
-### Initial configuration
+### Configuration
 
 ```yaml
 // import routing
@@ -62,7 +119,7 @@ public function onPayloadReceived(\Adadgio\GearBundle\Connector\NodeRed\Event\Pa
 {
     // you might need the request, who knows
     $request = $event->getRequest();
-    
+
     $payload = $event->Payload();
     // notice iteration changed to +1, pid always stays the same (unless you trigger another process)
     // otherwise you get back the parameters you defined earlier

@@ -149,7 +149,7 @@ class ApiCoreService
             // then return always authenticated
             return true;
         }
-
+        
         // load the specified authenticator class or service (it can be both)
         // if the provider is defined as a simple class, lets use it (see "class" option)
         if (null === $this->config['auth']['class'] && null === $this->config['auth']['provider']) {

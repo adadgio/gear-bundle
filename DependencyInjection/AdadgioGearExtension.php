@@ -28,7 +28,7 @@ class AdadgioGearExtension extends Extension
         // set all bundle parameters from configuration values
         $this->setBundleParameters($container, $config);
     }
-    
+
     /**
      * Set container parameters
      *
@@ -39,16 +39,18 @@ class AdadgioGearExtension extends Extension
     {
         // nodered configuration
         $container->setParameter('adadgio_gear.nodered', $config['nodered']);
-
+        
         // set all NodeRed parameters
         foreach ($config['nodered'] as $key => $value) {
             $name = sprintf('adadgio_gear.nodered.%s', $key);
             $container->setParameter($name, $value);
         }
 
-        // api configuration
-        $container->setParameter('adadgio_gear.api', $config['api']);
-        // also add dynamic api.auth.service option (can be null, by default, see also bundle services.yml declaration)
-        $container->setParameter('adadgio_gear.api.auth.provider', $config['api']['auth']['provider']);
+        // api configuration, if defined
+        if (isset($config['api'])) {
+            $container->setParameter('adadgio_gear.api', $config['api']);
+            // also add dynamic api.auth.service option (can be null, by default, see also bundle services.yml declaration)
+            $container->setParameter('adadgio_gear.api.auth.provider', $config['api']['auth']['provider']);
+        }
     }
 }

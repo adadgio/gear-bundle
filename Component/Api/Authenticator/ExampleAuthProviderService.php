@@ -9,7 +9,7 @@ class ExampleAuthProviderService extends AuthProvider implements AuthProviderInt
      */
     public function __construct()
     {
-        
+
     }
 
     /**

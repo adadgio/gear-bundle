@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
 
-                ->arrayNode('nodered')
+                ->arrayNode('nodered')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('host')->isRequired()->end()
                         ->scalarNode('port')->defaultValue(1880)->end()
@@ -39,9 +39,9 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('api')
+                ->arrayNode('api')->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('auth')
+                        ->arrayNode('auth')->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('type')->defaultValue(null)->end() // Basic|ApiKey|HeaderApiKey
                                 ->scalarNode('class')->defaultValue(null)->end()
