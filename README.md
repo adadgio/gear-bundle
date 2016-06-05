@@ -21,7 +21,7 @@ Its very easy to create API endpoints and secure them through any kind of authen
 ### Configuration
 
 ```yaml
-// in config.yml (basic auth example)
+# in config.yml (basic auth example)
 adadgio_gear:
     auth:
         type: Basic     # options: Basic (more default types not available in current version)
@@ -30,7 +30,7 @@ adadgio_gear:
         user: benny
         password: test
 
-// in config.yml (custom service auth example, like API client in database)
+# in config.yml (custom service auth example, like API client in database)
 adadgio_gear:
     auth:
         #type: ~        
@@ -93,13 +93,13 @@ class ExampleAuthProviderService extends AuthProvider implements AuthProviderInt
 ### Configuration
 
 ```yaml
-// import routing
+# import routing
 _adadgio_gear:
     resource: "@AdadgioGearBundle/Resources/config/routing.yml"
 ```
 
 ```yaml
-// in config.yml
+# in config.yml
 adadgio_gear:
     nodered:
         host: 127.0.0.1
