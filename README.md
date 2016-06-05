@@ -2,6 +2,18 @@
 
 # Installation
 
+Install with composer.
+
+```bash
+composer require adadgio/gear-bundle
+```
+
+Add the bundle to your app kernel.
+
+```php
+new Adadgio\GearBundle\AdadgioGearBundle(),
+```
+
 ## Api annotations and auth
 
 Its very easy to create API endpoints and secure them through any kind of authentication system.
@@ -24,6 +36,23 @@ adadgio_gear:
         #type: ~        
         #class: ~       # either define "class" or "provider", ex. "Adadgio\GearBundle\Component\Api\Authenticatir\AuthProvider"
         provider: my_bundle.api.my_client_auth  # you create the service and define what to do: see "adadgio_gear.api.authenticator_example_service"
+```
+
+### Annotation usage
+
+```php
+use Adadgio\GearBundle\Component\Api\ApiRequest;
+use Adadgio\GearBundle\Component\Api\ApiResponse;
+use Adadgio\GearBundle\Component\Api\Annotation\Api;
+
+/**
+ * @Route("/test/gear/api", name="test_gear_api")
+ * @Api(method={"POST","GET"}, enabled=true)
+ */
+public function myApiEndpointAction(Request $request, ApiRequest $apiRequest)
+{
+    return new ApiResponse(array('yes' => 'sir'));
+}
 ```
 
 Example using custom authenticator service.
