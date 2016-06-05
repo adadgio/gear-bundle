@@ -71,7 +71,7 @@ class Csv implements ReaderInterface
 
         return $this;
     }
-
+    
     /**
      * Reads from the input optionaly with a limit and offset
      *
@@ -119,7 +119,7 @@ class Csv implements ReaderInterface
 
         // close file handle
         fclose($handle);
-        
+
         return $this;
     }
 }

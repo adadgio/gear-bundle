@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
         $rootNode
             ->children()
+
                 ->arrayNode('nodered')
                     ->children()
                         ->scalarNode('host')->isRequired()->end()
@@ -37,6 +38,23 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('api')
+                    ->children()
+                        ->arrayNode('auth')
+                            ->children()
+                                ->scalarNode('type')->defaultValue(null)->end() // Basic|ApiKey|HeaderApiKey
+                                ->scalarNode('class')->defaultValue(null)->end()
+                                ->scalarNode('provider')->defaultValue(null)->end()
+                                ->scalarNode('user')->defaultValue(null)->end()
+                                ->scalarNode('password')->defaultValue(null)->end()
+                            ->end()
+                        ->end()
+                        // ->scalarNode('auth')->defaultValue(null)->end() // Basic|ApiKey|HeaderApiKey
+
+                    ->end()
+                ->end()
+
             ->end();
 
         return $treeBuilder;

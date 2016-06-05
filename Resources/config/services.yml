@@ -1,5 +1,30 @@
 services:
+    # node red services
     adadgio_gear.nodered.connector:
         class:     Adadgio\GearBundle\Connector\NodeRed\NodeRedConnector
         arguments:
             - "%adadgio_gear.nodered%"
+
+    # core api services
+    adadgio_gear.api.core_service:
+        class: Adadgio\GearBundle\Component\Api\ApiCoreService
+        arguments:
+            - "%adadgio_gear.api%"
+            - "@=(parameter('adadgio_gear.api.auth.provider')) ? container.get(parameter('adadgio_gear.api.auth.provider')) : null"
+
+    adadgio_gear.api.kernel_event_listener:
+        class: Adadgio\GearBundle\Component\Api\Listener\ApiKernelEventListener
+        tags:
+            - {name: kernel.event_listener, event: kernel.controller, method: onKernelController}
+            - {name: kernel.event_listener, event: kernel.exception, method: onKernelException}
+        arguments:
+            - "@annotation_reader"
+            - "@adadgio_gear.api.core_service"
+            
+    # authenticator example services
+    adadgio_gear.api.authenticator_example_service:
+        class: Adadgio\GearBundle\Component\Api\Authenticator\ExampleAuthProviderService
+        tags:
+            - { name: adadgio_gear.api.authenticator }
+        arguments:
+            - "@doctrine.orm.entity_manager"

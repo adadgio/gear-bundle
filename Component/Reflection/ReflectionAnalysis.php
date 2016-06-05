@@ -28,7 +28,7 @@ class ReflectionAnalysis
         if (count($exploded) === 2) {
             // there is a valid method
             $reflectionMethod = new \ReflectionMethod($exploded[0], $exploded[1]);
-
+            
             // create an array of \ReflectionParameter
             $this->methodParameters = $reflectionMethod->getParameters(); // an array of \ReflectionParameter(s)
 
@@ -47,14 +47,19 @@ class ReflectionAnalysis
      */
     public function findTypeHintedArgName($typeHint)
     {
+        // make sure the typehint is the short name, not full class name
+        // $parts = explode('\\', $typeHint);
+        // $typeHint = end($typeHint);
+
+
         // loop through each method parameters
         foreach ($this->methodParameters as $reflectionParam) {
             // each $parameter is a instance if \ReflectionParameter
             // we get the typehint short class name
-            $typeHintShortName = $this->getHintShortClassName($reflectionParam);
+            $typeHintClass = $this->getHintClassName($reflectionParam);
 
             // return the parameter declared variable name (without the "$")
-            if ($typeHint === $typeHintShortName) {
+            if ($typeHint === $typeHintClass) {
                 return $reflectionParam->getName();
             }
         }
@@ -70,6 +75,21 @@ class ReflectionAnalysis
      */
     private function getHintShortClassName(\ReflectionParameter $reflectionParam)
     {
+        $namespace = $this->getHintClassName($reflectionParam);
+
+        // then just return the type hint class short name
+        $namespaceParts = explode('\\', $namespace);
+        return end($namespaceParts);
+    }
+
+    /**
+     * Get the short class name version of the type hint class.
+     *
+     * @param  object \ReflectionParameter
+     * @return string Short type hint class name
+     */
+    private function getHintClassName(\ReflectionParameter $reflectionParam)
+    {
         // get the full type hint namespace "Namespace\Blah\TypehintClass"
         $reflectionClass = $reflectionParam->getClass();
 
@@ -79,10 +99,6 @@ class ReflectionAnalysis
             return false;
         }
 
-        $namespace = $reflectionClass->getName();
-
-        // then just return the type hint class short name
-        $namespaceParts = explode('\\', $namespace);
-        return end($namespaceParts);
+        return $reflectionClass->getName();
     }
 }
