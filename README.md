@@ -123,7 +123,7 @@ You will need to manually import the flows in your NodeRed app (or use flows dir
 
 ### Usage
 
-To trigger a loop (or just a delayed message), you need to create a `\Payload` that node red will send back to the AdagagioGearBundle loop controller (see `routing.yml` for more info). The controller dispatched an event when it receives back the payload. You can **listen to the event** and modify the payload to achieve your goal.
+To trigger a loop (or just a delayed message), you need to create a `\Payload` that node red will send back to the AdagagioGearBundle loop controller (see `routing.yml` for more info). The controller dispatches an event when it receives back the payload. You can **listen to the event** and modify the payload to achieve your goal.
 
 ```php
 use Adadgio\GearBundle\Connector\NodeRed\Payload;
