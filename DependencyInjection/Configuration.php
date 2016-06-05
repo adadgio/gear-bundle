@@ -43,7 +43,9 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('auth')->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('type')->defaultValue(null)->end() // Basic|ApiKey|HeaderApiKey
+                                ->enumNode('type')->defaultValue(null)
+                                    ->values(array('Basic', 'Client', null))
+                                ->end()
                                 ->scalarNode('class')->defaultValue(null)->end()
                                 ->scalarNode('provider')->defaultValue(null)->end()
                                 ->scalarNode('user')->defaultValue(null)->end()

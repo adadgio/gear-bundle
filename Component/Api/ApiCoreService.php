@@ -133,6 +133,7 @@ class ApiCoreService
      * @param  object \ApiRequest
      * @param  object \Annotation\Api
      * @return boolean If secured
+     * @todo Add and process requirements options (which also convert input type(s)) in body, POST or GET data
      */
     public function processRequest(Api\ApiRequest $apiRequest, Api\Annotation\Api $annotation)
     {
@@ -149,29 +150,13 @@ class ApiCoreService
             // then return always authenticated
             return true;
         }
-        
-        // load the specified authenticator class or service (it can be both)
-        // if the provider is defined as a simple class, lets use it (see "class" option)
-        if (null === $this->config['auth']['class'] && null === $this->config['auth']['provider']) {
-            // load a default provider matching the auth type
-            $provider = $this->createSimpleClassInstance($this->config['auth']['type']);
 
-        } else if (null !== $this->config['auth']['class']) {
-            // if the provider simple "class" is defined we use it. A simple class
-            // must extend the "AuthProvider" base class and implement AuthProviderInterface.
-            $class = $this->config['auth']['class'];
-            $provider = new $class();
+        // process annotation requirements
+        // (... not implemented yet)
 
-        } else if (null !== $this->config['auth']['provider']) {
-            // else the provider can be a service (see "service" option). In this case it
-            // must have the same methods as a simple class (except constructor you can use to inject
-            // other service) and extend the "AuthProvider" base class and implement AuthProviderInterface. as well
-            $provider = $this->authService;
 
-        } else {
-            // else use a default authenticator (the base "AuthProvider" which just returns true)
-            $provider = new Authenticator\AuthProvider();
-        }
+        // retrive which provider should handle the authentication
+        $provider = $this->getAuthenticationProvider();
 
         // check the class is well an authenticator, aiit!
         if (!$provider instanceof Api\Authenticator\AuthProviderInterface) {
@@ -192,6 +177,48 @@ class ApiCoreService
             return false;
         }
     }
+    
+    /**
+     * @todo Check requirements
+     */
+    private function handleRequirements()
+    {
+
+    }
+
+    /**
+     * Get authenticator class or service
+     *
+     * @return object Provider instanciated class or service.
+     */
+    private function getAuthenticationProvider()
+    {
+        // use the specified authenticator (default built-in class or custom
+        // class or service) to handle the authentication process
+        if (null === $this->config['auth']['class'] && null === $this->config['auth']['provider']) {
+            // when neither "class" or "provider" are defined, rely on the
+            // auth type to determine which class must handle the authentication
+            $provider = $this->createAuthenticationProviderInstance($this->config['auth']['type']);
+
+        } else if (null !== $this->config['auth']['class']) {
+            // if the provider simple "class" is defined we use it. A simple class
+            // must extend the "AuthProvider" base class and implement AuthProviderInterface.
+            $class = $this->config['auth']['class'];
+            $provider = new $class();
+
+        } else if (null !== $this->config['auth']['provider']) {
+            // else the provider can be a service (see "service" option). In this case it
+            // must have the same methods as a simple class (except constructor you can use to inject
+            // other service) and extend the "AuthProvider" base class and implement AuthProviderInterface. as well
+            $provider = $this->authService;
+
+        } else {
+            // else use a default authenticator (the base "AuthProvider" which just returns true)
+            $provider = new Authenticator\AuthProvider();
+        }
+
+        return $provider;
+    }
 
     /**
      * Create an instance of an auth provider class from a
@@ -200,7 +227,7 @@ class ApiCoreService
      * @param string Auth type keyword (Basic, ApiKey, HeaderKey, ...)
      * @return object \AuthProviderInterface
      */
-    private function createSimpleClassInstance($authType = null)
+    private function createAuthenticationProviderInstance($authType = null)
     {
         $namespace = 'Adadgio\GearBundle\Component\Api\Authenticator';
         $class = $namespace.'\\'.$authType.'AuthProvider';
