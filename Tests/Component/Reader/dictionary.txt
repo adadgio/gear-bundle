@@ -1,0 +1,7 @@
+pneunomia = pneumo
+respiratory = lung
+lung=smoking
+lung = smoke
+influenza = virus
+immunogenicity = zoonotic
+antiviral = virus

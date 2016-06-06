@@ -16,11 +16,11 @@ interface ReaderInterface
      * @return array Data array
      */
     public function getData();
-
+    
     /**
      * Responsible for iterating through a data source (API, file, CSV, HTML...)
      * This must hydrate $this->data as an array and return \ReaderInterface.
      * @return object Source\Reader
      */
-    public function read($offset, $limit);
+    public function read();
 }
