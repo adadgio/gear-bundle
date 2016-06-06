@@ -162,7 +162,7 @@ class ApiCoreService
         if (!$provider instanceof Api\Authenticator\AuthProviderInterface) {
             throw new Api\ApiException('The authentication provider must implement \Adadgio\GearBundle\Component\Api\Authenticator\AuthProviderInterface', 500);
         }
-
+        
         // dispatch the authentication method to a provider service and run
         // the three require methods for autentication (same for service or simple class)
         $provider
@@ -177,7 +177,7 @@ class ApiCoreService
             return false;
         }
     }
-    
+
     /**
      * @todo Check requirements
      */

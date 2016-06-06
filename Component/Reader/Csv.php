@@ -31,14 +31,9 @@ class Csv implements ReaderInterface
     public function __construct($csvfile)
     {
         $this->delimiter = "\t";
-
-        if (is_file($csvfile)) {
-            $this->csvfile = $csvfile;
-        } else {
-            throw new GearException('File not found "%s"', $csvfile);
-        }
+        $this->csvfile = $csvfile;
     }
-
+    
     /**
      * Get data rows count.
      *
@@ -71,7 +66,7 @@ class Csv implements ReaderInterface
 
         return $this;
     }
-    
+
     /**
      * Reads from the input optionaly with a limit and offset
      *
