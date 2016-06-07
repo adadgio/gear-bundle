@@ -55,6 +55,19 @@ class Dictionary implements ReaderInterface
     }
 
     /**
+     * Set parsed data (fosr tests or different hydration)
+     *
+     * @param array Dictionary data
+     * @return \Dictionary
+     */
+    public function setData(array $data = array())
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
      * Reads from the input optionaly with a limit and offset
      *
      * @param  integer Skip a number of rows (if X, x not included in result set)
@@ -65,7 +78,6 @@ class Dictionary implements ReaderInterface
     {
         $contents = file_get_contents($this->file);
         $data = array_filter(explode($this->delimiter, $contents));
-
 
         foreach ($data as $row) {
             $parts = explode('=', $row);

@@ -20,7 +20,7 @@ services:
         arguments:
             - "@annotation_reader"
             - "@adadgio_gear.api.core_service"
-            
+
     # authenticator example services
     adadgio_gear.api.authenticator_example_service:
         class: Adadgio\GearBundle\Component\Api\Authenticator\ExampleAuthProviderService
