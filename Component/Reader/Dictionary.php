@@ -21,7 +21,7 @@ class Dictionary implements ReaderInterface
      * Final data output
      */
     protected $data = array();
-    
+
     /**
      * The csv reader constructor, can use raw contents
      * or a file path on local or remote server.
@@ -78,7 +78,7 @@ class Dictionary implements ReaderInterface
     {
         $contents = file_get_contents($this->file);
         $data = array_filter(explode($this->delimiter, $contents));
-
+        
         foreach ($data as $row) {
             $parts = explode('=', $row);
             $key = trim($parts[0]);

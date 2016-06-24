@@ -1,7 +1,7 @@
 pneunomia = pneumo
 respiratory = lung
 lung=smoking
-lung = smoke
+lungs = smoke
 antiviral = virus
 immunogenicity = zoonotic
-antiviral = virus
+antiviral2 = virus
