@@ -1,3 +1,3 @@
-_adadgio_gear:
-    path:      /adadgio/gear/loop/worker
-    defaults:  { _controller: AdadgioGearBundle:Loop:receivePayload }
+adadgio_gear_loop_worker:
+    path:     /adadgio/gear/loop/worker
+    defaults: { _controller: AdadgioGearBundle:Loop:receivePayload }
