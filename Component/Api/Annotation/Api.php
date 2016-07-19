@@ -44,7 +44,7 @@ class Api
             return $value;
         }
     }
-    
+
     /**
      * Get properties.
      *

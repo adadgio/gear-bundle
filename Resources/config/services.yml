@@ -28,3 +28,9 @@ services:
             - { name: adadgio_gear.api.authenticator }
         arguments:
             - "@doctrine.orm.entity_manager"
+
+    # entity serialization
+    adadgio_gear.entity_serializer:
+        class: Adadgio\GearBundle\Component\Serialization\EntitySerializer
+        arguments:
+            - "%adadgio_gear.serialization%"

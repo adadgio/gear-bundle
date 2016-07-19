@@ -145,12 +145,12 @@ class ApiCoreService
             return false;
         }
 
-        // authentication can be enabled or disabled in annotations
-        if ($annotation->hasProperty('enabled') && $annotation->getProperty('enabled') === false) {
+        // authentication can be security or disabled in annotations
+        if ($annotation->hasProperty('security') && $annotation->getProperty('security') === false) {
             // then return always authenticated
             return true;
         }
-
+        
         // process annotation requirements
         // (... not implemented yet)
 
@@ -162,7 +162,7 @@ class ApiCoreService
         if (!$provider instanceof Api\Authenticator\AuthProviderInterface) {
             throw new Api\ApiException('The authentication provider must implement \Adadgio\GearBundle\Component\Api\Authenticator\AuthProviderInterface', 500);
         }
-        
+
         // dispatch the authentication method to a provider service and run
         // the three require methods for autentication (same for service or simple class)
         $provider
