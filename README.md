@@ -14,11 +14,18 @@ Add the bundle to your app kernel.
 new Adadgio\GearBundle\AdadgioGearBundle(),
 ```
 
-## Api annotations and auth
+## Table of contents
+
+1. [Api annotations and auth](#api)
+  1. [Configuration](#api-configuration)
+
+
+
+## <a name="api"></a>Api annotations and auth
 
 Its very easy to create API endpoints and secure them through any kind of authentication system.
 
-### Configuration
+### <a name="api-configuration"></a>Configuration
 
 ```yaml
 # in config.yml (basic auth example)
@@ -38,7 +45,7 @@ adadgio_gear:
         provider: my_bundle.api.my_client_auth  # you create the service and define what to do: see "adadgio_gear.api.authenticator_example_service"
 ```
 
-### Annotation usage
+### <a name="api-annotation"></a>Annotation usage
 
 ```php
 use Adadgio\GearBundle\Component\Api\ApiRequest;
@@ -88,9 +95,9 @@ class ExampleAuthProviderService extends AuthProvider implements AuthProviderInt
 }
 ```
 
-## NodeRed connector(s) and loops
+## <a name="nodered"></a>NodeRed connector(s) and loops
 
-### Configuration
+### <a name="nodered-configuration"></a>Configuration
 
 ```yaml
 # import routing
@@ -165,7 +172,7 @@ public function onPayloadReceived(\Adadgio\GearBundle\Connector\NodeRed\Event\Pa
 }
 ```
 
-## CSV reader
+## <a name="csv-reader"></a>CSV reader
 
 ```php
 use Adadgio\GearBundle\Component\Reader\Csv;
@@ -178,7 +185,7 @@ $data = $csv
     ->getData();
 ```
 
-## Entity hydration from data
+## <a name="entity-hydration"></a>Entity hydration from data
 <sub>
 ```php
 use Adadgio\GearBundle\Component\Hydration\EntityHydrator;
@@ -195,3 +202,12 @@ $hydrator
 $entities = $hydrator->getEntities();
 ```
 </sub>
+
+## <a name="serializer"></a>Serializer
+
+Transform an object in array. Possibilty to transform one object or a collection of objects.
+
+```php
+
+
+```
