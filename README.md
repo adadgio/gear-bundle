@@ -18,6 +18,13 @@ new Adadgio\GearBundle\AdadgioGearBundle(),
 
 1. [Api annotations and auth](#api)
   1. [Configuration](#api-configuration)
+  2. [Annotation usage](#api-annotation)
+2. [NodeRed connector(s) and loops](#nodered)
+  1. [Configuration](#nodered-configuration)
+  2. [Usage](#nodered-usage)
+3. [CSV reader](#csv-reader)
+4. [Entity hydration from data](#entity-hydration)
+5. [Serializer](#serializer)
 
 
 
@@ -128,7 +135,7 @@ You will need to manually import the flows in your NodeRed app (or use flows dir
 
 ![alt tag](https://raw.githubusercontent.com/adadgio/gear-bundle/master/Resources/help/nodered_flow.png)
 
-### Usage
+### <a name="nodered-usage"></a>Usage
 
 To trigger a loop (or just a delayed message), you need to create a `\Payload` that node red will send back to the AdagagioGearBundle loop controller (see `routing.yml` for more info). The controller dispatches an event when it receives back the payload. You can **listen to the event** and modify the payload to achieve your goal.
 
