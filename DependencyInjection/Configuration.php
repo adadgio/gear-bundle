@@ -56,6 +56,23 @@ class Configuration implements ConfigurationInterface
 
                     ->end()
                 ->end()
+                
+                ->arrayNode('serialization')->isRequired()
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('class')->isRequired()->end()
+                            ->arrayNode('fields')->isRequired()->cannotBeEmpty()
+                                ->prototype('array')
+                                    ->children()
+                                        ->scalarNode('type')->cannotBeEmpty()->defaultValue(null)->end()
+                                        ->scalarNode('method')->cannotBeEmpty()->defaultValue(null)->end()
+                                        ->scalarNode('arg')->cannotBeEmpty()->defaultValue(null)->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
 
             ->end();
 

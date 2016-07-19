@@ -28,7 +28,7 @@ class AdadgioGearExtension extends Extension
         // set all bundle parameters from configuration values
         $this->setBundleParameters($container, $config);
     }
-
+    
     /**
      * Set container parameters
      *
@@ -37,9 +37,12 @@ class AdadgioGearExtension extends Extension
      */
     private function setBundleParameters($container, array $config)
     {
+        // serialization configuration
+        $container->setParameter('adadgio_gear.serialization', $config['serialization']);
+
         // nodered configuration
         $container->setParameter('adadgio_gear.nodered', $config['nodered']);
-        
+
         // set all NodeRed parameters
         foreach ($config['nodered'] as $key => $value) {
             $name = sprintf('adadgio_gear.nodered.%s', $key);
