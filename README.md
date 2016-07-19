@@ -1,6 +1,6 @@
 # AdadgioGearBundle
 
-# Installation
+## Installation
 
 Install with composer.
 
@@ -215,6 +215,10 @@ $entities = $hydrator->getEntities();
 Transform an object in array. Possibilty to transform one object or a collection of objects.
 
 ```php
+use Adadgio\GearBundle\Component\Serialization\EntitySerializer;
 
+$entities = $em->getRepository('AppBundle:Product')->findAll();
 
+$serializer = $this->get('adadgio_gear.entity_serializer');
+$dataSerialized = $serializer->serialize($entities);
 ```
