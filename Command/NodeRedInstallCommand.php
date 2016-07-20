@@ -33,8 +33,10 @@ class NodeRedInstallCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $inputFlows = __DIR__.'/../Resources/nodered/adadgio.gear.flow.json';
-
+        $flowsTemplates = array(
+            __DIR__.'/../Resources/nodered/basic_loop.flow.json'
+        );
+        
         $outputDir = $input->getOption('output');
         if (null === $outputDir) {
             $outputDir = getcwd();
