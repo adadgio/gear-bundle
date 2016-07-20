@@ -11,7 +11,7 @@ composer require adadgio/gear-bundle
 Add the bundle to your app kernel.
 
 ```php
-new Adadgio\GearBundle\AdadgioGearBundle(),
+new Adadgio\GearBundle\AdadgioGearBundle();
 ```
 
 ## Table of contents
@@ -220,5 +220,5 @@ use Adadgio\GearBundle\Component\Serialization\EntitySerializer;
 $entities = $em->getRepository('AppBundle:Product')->findAll();
 
 $serializer = $this->get('adadgio_gear.entity_serializer');
-$dataSerialized = $serializer->serialize($entities);
+$dataSerialized = $serializer->serialize($entitiesÂ);
 ```
