@@ -1,6 +1,6 @@
 <?php
 
-namespace Adadgio\GearBundle\Connector\NodeRed;
+namespace Adadgio\GearBundle\NodeRed;
 
 /**
  * A NodeRed standardized payload to be send to HTTP endpoints.
@@ -71,7 +71,7 @@ class Payload implements PayloadInterface
 
         return $this;
     }
-    
+
     /**
      * Get current iteration parameter.
      *

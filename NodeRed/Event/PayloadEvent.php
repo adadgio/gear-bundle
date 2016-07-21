@@ -1,10 +1,10 @@
 <?php
 
-namespace Adadgio\GearBundle\Connector\NodeRed\Event;
+namespace Adadgio\GearBundle\NodeRed\Event;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\Event;
-use Adadgio\GearBundle\Connector\NodeRed\PayloadInterface;
+use Adadgio\GearBundle\NodeRed\PayloadInterface;
 
 /**
  * An event that is dispatched when node red sends
@@ -37,7 +37,7 @@ class PayloadEvent extends Event
     {
         return $this->request;
     }
-    
+
     /**
      * Set request.
      *

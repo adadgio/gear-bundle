@@ -27,22 +27,17 @@ class NodeRedInstallCommand extends ContainerAwareCommand
             ->setDescription('Create NodeRed flows')
         ;
     }
-
+    
     /**
      * Execute command.
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $flowsTemplates = array(
-            __DIR__.'/../Resources/nodered/basic_loop.flow.json'
-        );
-        
-        $outputDir = $input->getOption('output');
-        if (null === $outputDir) {
-            $outputDir = getcwd();
-        }
+        $container = $this->getContainer();
+        $this->builder = $container->get('adadgio_gear.nodered.flow_builder');
 
-        $outputFlows = $outputDir.'/'.basename($inputFlows);
+        $this->builder
+            ->installFlows();
 
         // env vars need to be set:
         // SYMFONY__HTTP__PROTOCOL = "http.protocol"
@@ -50,15 +45,8 @@ class NodeRedInstallCommand extends ContainerAwareCommand
         $protocol = '';
         $host = '';
 
-        $flowsData = file_get_contents($inputFlows);
-        $flowsData = str_replace('%http.protocol%', $protocol, $flowsData);
-        $flowsData = str_replace('%http.host%', $host, $flowsData);
-
-        // save new flows
-        file_put_contents($outputFlows, $flowsData);
-
         // say something before dying
         $output->writeln('');
-        $output->writeln(sprintf('Flows were saved to <fg=green;options=bold>%s</>', $outputDir));
+        $output->writeln(sprintf('Flows were saved to <fg=green;options=bold></>'));
     }
 }

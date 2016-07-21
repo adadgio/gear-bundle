@@ -3,7 +3,7 @@
     "id": "301e448b.cfe1bc",
     "type": "websocket-listener",
     "z": "tab17577e558a350cf",
-    "path": "\/socket\/flows\/application",
+    "path": "\/socket\/socket\/listener\/%index%",
     "wholemsg": "false"
   },
   {

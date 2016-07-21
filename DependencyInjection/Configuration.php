@@ -30,12 +30,24 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('host')->isRequired()->end()
                         ->scalarNode('port')->defaultValue(1880)->end()
                         ->scalarNode('protocol')->defaultValue('http://')->end()
+
                         ->arrayNode('http_auth')
                             ->children()
                                 ->scalarNode('user')->defaultValue(null)->end()
                                 ->scalarNode('pass')->defaultValue(null)->end()
                             ->end()
                         ->end()
+
+                        ->arrayNode('flows')
+                            ->children()
+                                ->scalarNode('output')->defaultValue('%kernel.cache_dir%')->end()
+                                ->scalarNode('configuration_class')->defaultValue('Adadgio\GearBundle\NodeRed\Configuration\Configuration')->end()
+                                ->arrayNode('parameters')
+                                    ->prototype('scalar')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+
                     ->end()
                 ->end()
 
@@ -56,7 +68,7 @@ class Configuration implements ConfigurationInterface
 
                     ->end()
                 ->end()
-                
+
                 ->arrayNode('serialization')->isRequired()
                     ->prototype('array')
                         ->children()

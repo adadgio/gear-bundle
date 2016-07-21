@@ -1,6 +1,6 @@
 <?php
 
-namespace Adadgio\GearBundle\Connector\NodeRed;
+namespace Adadgio\GearBundle\NodeRed;
 
 interface PayloadInterface
 {

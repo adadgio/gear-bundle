@@ -1,0 +1,43 @@
+[
+    {
+      "id": "idA",
+      "type": "websocket-listener",
+      "z": "tab17577e558a350cf",
+      "path": "%protocol%%domain%\/socket\/socket\/listener\/%index%",
+      "wholemsg": "false"
+    },
+    {
+      "id": "idB",
+      "type": "http in",
+      "z": "3da45b3.3c4e9a4",
+      "name": "Input",
+      "url": "%protocol%%domain%\/adadgio\/loop\/start\/%index%",
+      "method": "post",
+      "swaggerDoc": "",
+      "x": 268,
+      "y": 118,
+      "wires": [
+        [
+          "idA"
+        ]
+      ]
+    },
+    {
+      "id": "idC",
+      "type": "function",
+      "z": "3da45b3.3c4e9a4",
+      "name": "Go on",
+      "func": "\nreturn [msg,msg];",
+      "outputs": "2",
+      "x": 404.85715702602,
+      "y": 145.57143224988,
+      "wires": [
+        [
+          "idC"
+        ],
+        [
+          "idB"
+        ]
+      ]
+    }
+]
