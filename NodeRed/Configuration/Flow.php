@@ -111,6 +111,10 @@ class Flow
         $this->flow = $this->replaceFlowParameters($this->flow);
         $this->flow = $this->replaceNodeIds($this->flow);
 
+        $this->flow = $this->displaceCoordinates($this->flow);
+
+        $this->flow = $this->attachToTab($this->flow);
+
         return $this;
     }
 
@@ -120,11 +124,54 @@ class Flow
      * @param string Tab name
      * @return object \Flow
      */
-    public function setTab($tab)
+    public function setTab($label)
     {
-        $this->tab = str_replace(' ', '_', trim($tab));
+        $this->tab = array(
+            'type'  => 'tab',
+            'id'    => self::createNodeId(),
+            'label' => $label,
+        );
 
         return $this;
+    }
+
+    /**
+     * Add a tab node and attach nodes to it
+     *
+     * @param array Flow array representation
+     * @return array Flow array representation
+     * @todo Should maybe not be here but rather in the \FlowBuilder (probably...?)
+     */
+    private function attachToTab(array $flow)
+    {
+        if (null === $this->tab) { return $flow; }
+        
+        // add the tab
+        array_unshift($flow, $this->tab);
+
+        // replace the "z" property of all the nodes (they belong to the tab!)
+        foreach ($flow as $i => $node) {
+            if (!isset($node['z'])) { continue; }
+            $flow[$i]['z'] = $this->tab['id'];
+        }
+
+        return $flow;
+    }
+
+    /**
+     * Displace node "y" coordinates a bit depending on index.
+     *
+     * @param array Flow array representation
+     * @return array Flow array representation
+     */
+    private function displaceCoordinates(array $flow)
+    {
+        foreach ($flow as $i => $node) {
+            if (!isset($flow[$i]['x'])) { continue; }
+            $flow[$i]['x'] = $flow[$i]['x'] + (10 * $this->index);
+        }
+
+        return $flow;
     }
 
     /**
@@ -144,7 +191,7 @@ class Flow
                 $flow[$i][$key] = str_replace('%index%', $this->index, $flow[$i][$key]);
             }
         }
-        
+
         return $flow;
     }
 

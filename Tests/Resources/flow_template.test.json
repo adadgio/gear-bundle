@@ -14,8 +14,8 @@
       "url": "%protocol%%domain%\/adadgio\/loop\/start\/%index%",
       "method": "post",
       "swaggerDoc": "",
-      "x": 268,
-      "y": 118,
+      "x": 200,
+      "y": 100,
       "wires": [
         [
           "idA"
@@ -29,8 +29,8 @@
       "name": "Go on",
       "func": "\nreturn [msg,msg];",
       "outputs": "2",
-      "x": 404.85715702602,
-      "y": 145.57143224988,
+      "x": 400,
+      "y": 145,
       "wires": [
         [
           "idC"

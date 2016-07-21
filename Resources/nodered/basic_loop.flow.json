@@ -1,12 +1,5 @@
 [
   {
-    "id": "301e448b.cfe1bc",
-    "type": "websocket-listener",
-    "z": "tab17577e558a350cf",
-    "path": "\/socket\/socket\/listener\/%index%",
-    "wholemsg": "false"
-  },
-  {
     "id": "9bb91265.ed4c4",
     "type": "http in",
     "z": "3da45b3.3c4e9a4",
@@ -58,7 +51,7 @@
     "name": "",
     "method": "POST",
     "ret": "obj",
-    "url": "%protocol%%domain\/%adadgio\/loop\/worker",
+    "url": "%protocol%%domain%\/adadgio\/loop\/worker",
     "x": 577.4285736084,
     "y": 181.57139587402,
     "wires": [
@@ -116,25 +109,11 @@
     "wires": [
       [
         "d81d4340.60395",
-        "1c18c8ed.658087",
-        "b2cd7f66.6becf"
+        "1c18c8ed.658087"
       ],
       [
         "4018482.56529b8"
       ]
-    ]
-  },
-  {
-    "id": "b2cd7f66.6becf",
-    "type": "websocket out",
-    "z": "3da45b3.3c4e9a4",
-    "name": "Socket (ws1)",
-    "server": "301e448b.cfe1bc",
-    "client": "",
-    "x": 778.89291599819,
-    "y": 165.21428121839,
-    "wires": [
-
     ]
   }
 ]
