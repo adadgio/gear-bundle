@@ -39,7 +39,6 @@ class FlowBuilder
                 ->parseFlow();
 
             // set the tabs...
-            print_r($flow->getJson());
             $flowsArray = array_merge($flowsArray, $flow->getArray());
         }
         

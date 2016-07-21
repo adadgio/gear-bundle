@@ -58,7 +58,7 @@
     "name": "",
     "method": "POST",
     "ret": "obj",
-    "url": "%protocol%%domain%adadgio\/loop\/worker",
+    "url": "%protocol%%domain\/%adadgio\/loop\/worker",
     "x": 577.4285736084,
     "y": 181.57139587402,
     "wires": [

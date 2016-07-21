@@ -74,7 +74,7 @@ class Flow
      */
     public function getJson()
     {
-        return json_encode($this->flow);
+        return json_encode($this->flow, JSON_PRETTY_PRINT);
     }
 
     /**
@@ -135,7 +135,17 @@ class Flow
      */
     private function replaceFlowIndexes(array $flow)
     {
-        return str_replace('%index%', $this->index, $flow);
+        $keys = array('path', 'url');
+
+        foreach ($flow as $i => $node) {
+            foreach ($keys as $key) {
+                if (!isset($node[$key])) { continue; }
+
+                $flow[$i][$key] = str_replace('%index%', $this->index, $flow[$i][$key]);
+            }
+        }
+        
+        return $flow;
     }
 
     /**
@@ -146,8 +156,16 @@ class Flow
      */
     private function replaceFlowParameters(array $flow)
     {
-        foreach ($this->config['flows']['parameters'] as $name => $value) {
-            $flow = str_replace('%'.$name.'%', $value, $flow);
+        $keys = array('path', 'url');
+
+        foreach ($flow as $i => $node) {
+            foreach ($keys as $key) {
+                if (!isset($node[$key])) { continue; }
+
+                foreach ($this->config['flows']['parameters'] as $name => $value) {
+                    $flow[$i][$key] = str_replace('%'.$name.'%', $value, $flow[$i][$key]);
+                }
+            }
         }
 
         return $flow;
@@ -171,7 +189,7 @@ class Flow
 
             // replace all connected wires
             $flow = $this->updateFlowWires($flow, $oldId, $newId);
-            
+
             // finally replace the node id
             $flow[$i]['id'] = $newId;
         }

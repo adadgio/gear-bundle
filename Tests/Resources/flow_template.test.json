@@ -3,7 +3,7 @@
       "id": "idA",
       "type": "websocket-listener",
       "z": "tab17577e558a350cf",
-      "path": "%protocol%%domain%\/socket\/socket\/listener\/%index%",
+      "path": "%protocol%%domain%\/socket\/listener\/%index%",
       "wholemsg": "false"
     },
     {
