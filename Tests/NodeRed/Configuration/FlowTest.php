@@ -46,7 +46,7 @@ class FlowTest extends \PHPUnit_Framework_TestCase
         // assert all wires have changed according to the new ids
         $this->assertEquals($arrayFlow[2]['wires'], array(array($nodeAId)));
         $this->assertEquals($arrayFlow[3]['wires'], array( array($nodeCId), array($nodeBId) ));
-
+        
         // assert variables replacements
         $this->assertEquals($arrayFlow[1]['path'], 'https://test-domain.com/socket/listener/3');
         $this->assertEquals($arrayFlow[2]['url'], 'https://test-domain.com/adadgio/loop/start/3');
