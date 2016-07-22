@@ -25,7 +25,7 @@ class BasicAuthProvider extends AuthProvider implements AuthProviderInterface
         // http://stackoverflow.com/questions/19443718/symfony-2-3-getrequest-headers-not-showing-authorization-bearer-token
 
         $config = $this->getConfig();
-
+        
         $user = $config['user'];
         $password = $config['password'];
         $base64 = base64_encode($user.':'.$password);

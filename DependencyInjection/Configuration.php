@@ -65,18 +65,29 @@ class Configuration implements ConfigurationInterface
 
                 ->arrayNode('api')->addDefaultsIfNotSet()
                     ->children()
+
                         ->arrayNode('auth')->addDefaultsIfNotSet()
                             ->children()
                                 ->enumNode('type')->defaultValue(null)
-                                    ->values(array('Basic', 'Client', null))
+                                    ->values(array('Basic', 'Client', 'Headers', 'Static', null))
                                 ->end()
                                 ->scalarNode('class')->defaultValue(null)->end()
                                 ->scalarNode('provider')->defaultValue(null)->end()
                                 ->scalarNode('user')->defaultValue(null)->end()
                                 ->scalarNode('password')->defaultValue(null)->end()
+
+                                ->arrayNode('clients')
+                                    ->prototype('array')
+                                        ->children()
+                                            ->scalarNode('id')->defaultValue(null)->end()
+                                            ->scalarNode('secret')->defaultValue(null)->end()
+                                            // ->prototype('scalar')->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+
                             ->end()
                         ->end()
-                        // ->scalarNode('auth')->defaultValue(null)->end() // Basic|ApiKey|HeaderApiKey
 
                     ->end()
                 ->end()
