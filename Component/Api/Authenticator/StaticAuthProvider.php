@@ -29,12 +29,13 @@ class StaticAuthProvider extends AuthProvider implements AuthProviderInterface
 
         $headerClientId = $headers[$clientIdField][0];
         $headerClientKey = $headers[$clientKeyField][0];
-
+        
         // check both client id and secret against the config providers
         foreach ($config['clients'] as $name => $staticClient) {
+            if ($staticClient['enabled'] !== true) { continue; } // just skip client if its not enabled
+
             if ($staticClient['id'] === $headerClientId && $staticClient['secret'] === $headerClientKey) {
-                // client found and key matches!
-                return true;
+                return true; // client found and key matches!
             }
         }
 

@@ -75,13 +75,13 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('provider')->defaultValue(null)->end()
                                 ->scalarNode('user')->defaultValue(null)->end()
                                 ->scalarNode('password')->defaultValue(null)->end()
-
+                                
                                 ->arrayNode('clients')
                                     ->prototype('array')
                                         ->children()
                                             ->scalarNode('id')->defaultValue(null)->end()
                                             ->scalarNode('secret')->defaultValue(null)->end()
-                                            // ->prototype('scalar')->end()
+                                            ->booleanNode('enabled')->defaultValue(true)->end()
                                         ->end()
                                     ->end()
                                 ->end()
