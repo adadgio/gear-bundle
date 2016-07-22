@@ -135,13 +135,14 @@ class ApiKernelEventListener
         $consideredApiRequests = array(
             'application/json', 'application/json; charset=utf-8'
         );
-        
+
         // the exception must be of type \ApiException, only then we
         // send a json response otherwise this will apply to each exception
         // in every controller. We dont want that
         if ($exception instanceof Api\ApiException OR in_array($contentType, $consideredApiRequests)) {
             $code = ($exception->getCode() === 0) ? 500 : $exception->getCode();
-            $error = $this->getVerboseErrorMessageFrom($exception);
+            // but avoid verbose exception when its an instance of \ApiExeption (its not fatal, its just unauthorized or something)
+            $error = ($exception instanceof Api\ApiException) ? $exception->getMEssage() : $this->getVerboseErrorMessageFrom($exception);
 
             $event->setResponse(
                 new JsonResponse(array('type' => 'error', 'message' => $error), $code)
@@ -149,7 +150,7 @@ class ApiKernelEventListener
             return;
         }
     }
-
+    
     /**
      * Find more relevant verbose error message (line, etc.)
      *
