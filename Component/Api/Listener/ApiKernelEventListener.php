@@ -135,7 +135,7 @@ class ApiKernelEventListener
         $consideredApiRequests = array(
             'application/json', 'application/json; charset=utf-8'
         );
-
+        
         // the exception must be of type \ApiException, only then we
         // send a json response otherwise this will apply to each exception
         // in every controller. We dont want that
@@ -150,7 +150,7 @@ class ApiKernelEventListener
             return;
         }
     }
-    
+
     /**
      * Find more relevant verbose error message (line, etc.)
      *

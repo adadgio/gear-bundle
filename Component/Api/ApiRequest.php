@@ -79,7 +79,7 @@ class ApiRequest
     {
         return $this->content;
     }
-    
+
     /**
      * Get request content.
      *
@@ -118,6 +118,17 @@ class ApiRequest
         return isset($this->content[$key]) ? $this->content[$key] : null;
     }
 
+    /**
+     * Get content parameter.
+     *
+     * @param  string Parameter key
+     * @return mixed  Content parameter value.
+     */
+    public function all()
+    {
+        return $this->content;
+    }
+    
     /**
      * Has content parameter.
      *

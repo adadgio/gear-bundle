@@ -2,12 +2,14 @@
 
 namespace Adadgio\GearBundle\Component\Api;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-class ApiResponse extends JsonResponse
+class ApiResponse extends Response
 {
-    public function __construct($data = null, $status = 200, array $headers = array())
+    public function __construct(array $data = array(), $code = 200)
     {
-        parent::__construct($data, $status, $headers);
+        parent::__construct(json_encode($data), $code);
+        
+        $this->headers->set('Content-Type', 'application/json; charset=utf-8');
     }
 }
