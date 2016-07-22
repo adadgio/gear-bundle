@@ -48,6 +48,18 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
 
+                        ->arrayNode('settings')
+                            ->children()
+                                ->arrayNode('adminAuth')
+                                    ->children()
+                                        ->scalarNode('username')->defaultValue(null)->end()
+                                        ->scalarNode('password')->defaultValue(null)->end()
+                                    ->end()
+                                ->end()
+                                //->prototype('scalar')->end()
+                            ->end()
+                        ->end()
+
                     ->end()
                 ->end()
 
