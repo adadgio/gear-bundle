@@ -4,17 +4,19 @@ namespace Adadgio\GearBundle\Component\Api\Authenticator;
 
 class AuthProvider implements AuthProviderInterface
 {
-    protected $request;
+    private $config;
+    private $annotation;
+    private $request;
+    private $isAuthenticated = false;
 
-    protected $isAuthenticated = false;
-
-    public function configure(array $config = array())
+    public function configure(array $config = array(), \Adadgio\GearBundle\Component\Api\Annotation\Api $annotation)
     {
         $this->config = $config;
+        $this->annotation = $annotation;
 
         return $this;
     }
-    
+
     public function authenticate()
     {
         return true;
@@ -28,6 +30,11 @@ class AuthProvider implements AuthProviderInterface
     public function getRequest()
     {
         return $this->request;
+    }
+
+    public function getAnnotation()
+    {
+        return $this->annotation;
     }
 
     public function setRequest(\Adadgio\GearBundle\Component\Api\ApiRequest $request)

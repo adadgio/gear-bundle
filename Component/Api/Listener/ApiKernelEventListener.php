@@ -95,7 +95,7 @@ class ApiKernelEventListener
             // Example: indexAction(Request $request, ApiHandler $api){...}
             $analysis = new ReflectionAnalysis();
             $analysis->of($request->attributes->get('_controller'));
-            
+
             $argumentName = $analysis->findTypeHintedArgName(Api\ApiRequest::class);
             // ReflectionAnalysis::ofController($request->attributes->get('_controller'));
             // $argumentName = ReflectionAnalysis::getArgumentTypeHintedWith('ApiHandler');
@@ -132,45 +132,23 @@ class ApiKernelEventListener
         $request = $event->getRequest();
         $contentType = $request->headers->get('content-type');
 
-        // $consideredApiRequests = array(
-        //     'application/json', 'application/json; charset=utf-8'
-        // );
-
+        $consideredApiRequests = array(
+            'application/json', 'application/json; charset=utf-8'
+        );
+        
         // the exception must be of type \ApiException, only then we
         // send a json response otherwise this will apply to each exception
         // in every controller. We dont want that
-        if ($exception instanceof Api\ApiException) {
+        if ($exception instanceof Api\ApiException OR in_array($contentType, $consideredApiRequests)) {
+            $code = ($exception->getCode() === 0) ? 500 : $exception->getCode();
+            // but avoid verbose exception when its an instance of \ApiExeption (its not fatal, its just unauthorized or something)
+            $error = ($exception instanceof Api\ApiException) ? $exception->getMEssage() : $this->getVerboseErrorMessageFrom($exception);
+
             $event->setResponse(
-                new JsonResponse(array('type' => 'error', 'message' => $exception->getMessage()), $exception->getCode())
+                new JsonResponse(array('type' => 'error', 'message' => $error), $code)
             );
             return;
         }
-
-        // // catch ApiException to return a Json response rather than the Symfony basic exception
-        // if ($exception instanceof \Adadgio\RocketBundle\Component\ApiEngine\ApiException) {
-        //
-        //     $event->setResponse(ApiEngine\ApiResponse::fire(array(
-        //         'message' => $exception->getMessage(),
-        //     ), $exception->getCode()));
-        //
-        // } else if (in_array($contentType, $consideredApiRequests)) {
-        //     // catch \ApiException errors to return a Json response rather than the Symfony basic exception
-        //     // and/or check if header is made from an API or with content type application/json. Both return
-        //     // nicer debuggable messages in JSON for all APIs.
-        //
-        //     // get error message code
-        //     $code = empty($exception->getCode()) ? 500 : $exception->getCode();
-        //
-        //     // display more error message when in dev or staging
-        //     if ($this->environment === 'prod') {
-        //         $error = $exception->getMessage();
-        //     } else {
-        //         $error = $this->getVerboseErrorMessageFrom($exception);
-        //     }
-        //
-        //     // display a nice error response
-        //     $event->setResponse(ApiEngine\ApiResponse::fire(array('message' => $error), $code));
-        // }
     }
 
     /**
@@ -181,9 +159,10 @@ class ApiKernelEventListener
     private function getVerboseErrorMessageFrom($exception)
     {
         $file = $exception->getFile();
-        $parts = explode('/', $file);
+        $parts = array_map('trim', explode('/', $file));
         $fileInfo = end($parts);
 
-        return sprintf('%s in file %s at line %s', $exception->getMessage(), $fileInfo, $exception->getLine());
+        $error = sprintf('%s in file %s at line %s', $exception->getMessage(), $fileInfo, $exception->getLine());
+        return str_replace('  ', ' ', $error);
     }
 }

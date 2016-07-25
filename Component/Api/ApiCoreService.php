@@ -150,13 +150,11 @@ class ApiCoreService
             // then return always authenticated
             return true;
         }
-        
+
         // process annotation requirements
         // (... not implemented yet)
-
-
         // retrive which provider should handle the authentication
-        $provider = $this->getAuthenticationProvider();
+        $provider = $this->getAuthenticationProvider($annotation);
 
         // check the class is well an authenticator, aiit!
         if (!$provider instanceof Api\Authenticator\AuthProviderInterface) {
@@ -167,7 +165,7 @@ class ApiCoreService
         // the three require methods for autentication (same for service or simple class)
         $provider
             ->setRequest($apiRequest)
-            ->configure($this->config['auth'])
+            ->configure($this->config['auth'], $annotation)
             ->authenticate();
 
         if ($provider->isAuthenticated()) {
@@ -191,8 +189,12 @@ class ApiCoreService
      *
      * @return object Provider instanciated class or service.
      */
-    private function getAuthenticationProvider()
+    private function getAuthenticationProvider(\Adadgio\GearBundle\Component\Api\Annotation\Api $annotation)
     {
+        // if authorization method is static, use the satic auth provider
+        if ($annotation->getProperty('type') === 'static') {
+            $provider = new Authenticator\StaticAuthProvider();
+        } else
         // use the specified authenticator (default built-in class or custom
         // class or service) to handle the authentication process
         if (null === $this->config['auth']['class'] && null === $this->config['auth']['provider']) {

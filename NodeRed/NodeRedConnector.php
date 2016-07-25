@@ -1,6 +1,6 @@
 <?php
 
-namespace Adadgio\GearBundle\Connector\NodeRed;
+namespace Adadgio\GearBundle\NodeRed;
 
 use Symfony\Component\HttpFoundation\Request;
 use Adadgio\GearBundle\Component\Http\Curl;
