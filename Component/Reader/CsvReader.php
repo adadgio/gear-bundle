@@ -5,7 +5,7 @@ namespace Adadgio\GearBundle\Component\Reader;
 use Adadgio\GearBundle\Component\Reader\ReaderInterface;
 use Adadgio\GearBundle\Exception\GearException;
 
-class Csv implements ReaderInterface
+class CsvReader implements ReaderInterface
 {
     /**
      * @var string CSV fgets delimiter
@@ -33,7 +33,7 @@ class Csv implements ReaderInterface
         $this->delimiter = "\t";
         $this->csvfile = $csvfile;
     }
-    
+
     /**
      * Get data rows count.
      *

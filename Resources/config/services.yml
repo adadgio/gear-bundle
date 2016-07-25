@@ -34,3 +34,9 @@ services:
         class: Adadgio\GearBundle\Component\Serialization\EntitySerializer
         arguments:
             - "%adadgio_gear.serialization%"
+
+    # csv exporter
+    adadgio_gear.csv_exporter:
+        class: Adadgio\GearBundle\Component\Reader\CsvExporter
+        arguments:
+            - "@doctrine.orm.entity_manager"

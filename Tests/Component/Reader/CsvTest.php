@@ -2,14 +2,14 @@
 
 namespace Adadgio\GearBundle\Tests\Component\Reader;
 
-use Adadgio\GearBundle\Component\Reader\Csv;
+use Adadgio\GearBundle\Component\Reader\CsvReader;
 
-class CsvTest  extends \PHPUnit_Framework_TestCase
+class CsvReaderTest  extends \PHPUnit_Framework_TestCase
 {
     public function testCaseLimitOffsetA()
     {
         $file = __DIR__.'/tabs_semicolon.csv';
-        $csv = new Csv($file);
+        $csv = new CsvReader($file);
 
         $data = $csv
             ->setDelimiter(';')
@@ -23,7 +23,7 @@ class CsvTest  extends \PHPUnit_Framework_TestCase
     public function testCaseLimitOffsetB()
     {
         $file = __DIR__.'/tabs_semicolon.csv';
-        $csv = new Csv($file);
+        $csv = new CsvReader($file);
 
         $data = $csv
             ->setDelimiter(';')
@@ -37,7 +37,7 @@ class CsvTest  extends \PHPUnit_Framework_TestCase
     public function testCaseA()
     {
         $file = __DIR__.'/tabs_semicolon.csv';
-        $csv = new Csv($file);
+        $csv = new CsvReader($file);
 
         $data = $csv
             ->setDelimiter(';')
@@ -47,11 +47,11 @@ class CsvTest  extends \PHPUnit_Framework_TestCase
         $this->assertEquals($csv->countRows(), 78);
         $this->assertEquals($data[71], array('A520', 'Syphilis cardio-vasculaire'));
     }
-    
+
     public function testCaseB()
     {
         $file = __DIR__.'/unix_comma.csv';
-        $csv = new Csv($file);
+        $csv = new CsvReader($file);
 
         $data = $csv
             ->setDelimiter(',')
@@ -65,7 +65,7 @@ class CsvTest  extends \PHPUnit_Framework_TestCase
     public function testCaseC()
     {
         $file = __DIR__.'/unix_semicolon.csv';
-        $csv = new Csv($file);
+        $csv = new CsvReader($file);
 
         $data = $csv
             ->setDelimiter(';')
@@ -79,7 +79,7 @@ class CsvTest  extends \PHPUnit_Framework_TestCase
     public function testCaseD()
     {
         $file = __DIR__.'/windows_comma.csv';
-        $csv = new Csv($file);
+        $csv = new CsvReader($file);
 
         $data = $csv
             ->setDelimiter(',')

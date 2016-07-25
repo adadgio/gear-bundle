@@ -5,7 +5,7 @@ namespace Adadgio\GearBundle\Component\Reader;
 use Adadgio\GearBundle\Component\Reader\ReaderInterface;
 use Adadgio\GearBundle\Exception\GearException;
 
-class Dictionary implements ReaderInterface
+class DictionaryReader implements ReaderInterface
 {
     /**
      * @var string CSV fgets delimiter
@@ -78,7 +78,7 @@ class Dictionary implements ReaderInterface
     {
         $contents = file_get_contents($this->file);
         $data = array_filter(explode($this->delimiter, $contents));
-        
+
         foreach ($data as $row) {
             $parts = explode('=', $row);
             $key = trim($parts[0]);

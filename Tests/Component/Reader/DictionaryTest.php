@@ -2,14 +2,14 @@
 
 namespace Adadgio\GearBundle\Tests\Component\Reader;
 
-use Adadgio\GearBundle\Component\Reader\Dictionary;
+use Adadgio\GearBundle\Component\Reader\DictionaryReader;
 
-class DictionaryTest extends \PHPUnit_Framework_TestCase
+class DictionaryReaderTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {
         $file = __DIR__.'/dictionary.txt';
-        $dictionary = new Dictionary($file);
+        $dictionary = new DictionaryReader($file);
 
         $data = $dictionary
             ->read()

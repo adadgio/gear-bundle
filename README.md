@@ -22,9 +22,10 @@ new Adadgio\GearBundle\AdadgioGearBundle();
 2. [NodeRed connector(s) and loops](#nodered)
   1. [Configuration](#nodered-configuration)
   2. [Usage](#nodered-usage)
-3. [CSV reader](#csv-reader)
-4. [Entity hydration from data](#entity-hydration)
-5. [Serializer](#serializer)
+3. [CSV exporter](#csv-exporter)
+4. [CSV reader](#csv-reader)
+5. [Entity hydration from data](#entity-hydration)
+6. [Serializer](#serializer)
 
 
 
@@ -179,12 +180,24 @@ public function onPayloadReceived(\Adadgio\GearBundle\Connector\NodeRed\Event\Pa
 }
 ```
 
+## <a name="csv-exporter"></a>CSV exporter
+
+```php
+use Adadgio\GearBundle\Component\Reader\CsvExporter;
+
+$exporter = $this->get('adadgio_gear.csv_exporter')
+    ->setName("exportFileName")
+    ->setColumns(array('label', 'views'))
+    ->setData(array(array('one','two'),array('three','for')))
+    ->generate();
+```
+
 ## <a name="csv-reader"></a>CSV reader
 
 ```php
-use Adadgio\GearBundle\Component\Reader\Csv;
+use Adadgio\GearBundle\Component\Reader\CsvReader;
 
-$csv = new Csv('data/test.csv');
+$csv = new CsvReader('data/test.csv');
 
 $data = $csv
     ->setDelimiter(';')
