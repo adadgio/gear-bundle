@@ -15,7 +15,7 @@ class FlowBuilder
         $this->config = $config;
         $this->locator = $locator;
     }
-
+    
     /**
      *
      * @return object \FlowBuilder
@@ -95,7 +95,7 @@ class FlowBuilder
     {
         $output = $this->config['flows']['output'].'/flows.json';
         $contents = json_encode($flows);
-        
+
         return file_put_contents($output, $contents);
     }
 

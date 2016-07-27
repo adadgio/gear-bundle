@@ -7,11 +7,12 @@ class Flow
     private $file;
     private $index;
     private $config;
+    private $params;
     private $templatesDir;
     private $templatesPath;
     private $tab;
     private $flow;
-    
+
     /**
      * Class constructor.
      *
@@ -21,6 +22,7 @@ class Flow
     public function __construct($file)
     {
         $this->file = $file;
+        $this->params = array();
     }
 
     /**
@@ -43,6 +45,32 @@ class Flow
         if (!is_file($this->templatePath)) {
             throw new \Exception(sprintf('Node red flow template path is incorrect (no file found) "%s"', $this->templatePath));
         }
+
+        return $this;
+    }
+
+    /**
+     * Set one variable parameter in the flow. Parses before config.
+     *
+     * @param string
+     * @param object \Flow
+     */
+    public function setParam($key, $value)
+    {
+        $this->params[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Set several variable parameters in the flow. Parsed before config.
+     *
+     * @param array
+     * @param object \Flow
+     */
+    public function setParams(array $params)
+    {
+        $this->params = $params;
 
         return $this;
     }
@@ -108,7 +136,8 @@ class Flow
         $this->flow = json_decode(file_get_contents($this->templatePath), true);
 
         $this->flow = $this->replaceFlowIndexes($this->flow);
-        $this->flow = $this->replaceFlowParameters($this->flow);
+        $this->flow = $this->replaceFlowParams($this->flow); // before config ! params can have vars inside
+        $this->flow = $this->replaceFlowConfig($this->flow);
         $this->flow = $this->replaceNodeIds($this->flow);
 
         $this->flow = $this->displaceCoordinates($this->flow);
@@ -190,6 +219,29 @@ class Flow
 
         return $flow;
     }
+    
+    /**
+     * Replace array flow variable parameters.
+     *
+     * @param array Flow
+     * @return array Flow
+     */
+    private function replaceFlowParams(array $flow)
+    {
+        $keys = array_keys($this->params);
+
+        foreach ($flow as $i => $node) {
+            foreach ($keys as $key) {
+                if (!isset($node[$key])) { continue; }
+
+                foreach ($this->config['flows']['parameters'] as $name => $value) {
+                    $flow[$i][$key] = str_replace('%'.$name.'%', $value, $flow[$i][$key]);
+                }
+            }
+        }
+
+        return $flow;
+    }
 
     /**
      * Replace array flow variable parameters.
@@ -197,7 +249,7 @@ class Flow
      * @param array Flow
      * @return array Flow
      */
-    private function replaceFlowParameters(array $flow)
+    private function replaceFlowConfig(array $flow)
     {
         $keys = array('path', 'url');
 

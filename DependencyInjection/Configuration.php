@@ -101,7 +101,7 @@ class Configuration implements ConfigurationInterface
     {
         $builder = new TreeBuilder();
         $node = $builder->root('settings')->isRequired();
-
+        
         return $node
             ->children()
 

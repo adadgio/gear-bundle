@@ -8,13 +8,13 @@ class FlowConfiguration implements FlowConfigurationInterface
 {
     protected $flows;
     protected $settings;
-    
+
     public function __construct()
     {
         $this->flows = array();
         $this->settings = new Settings();
     }
-
+    
     public function configure()
     {
         return $this;
