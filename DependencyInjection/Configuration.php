@@ -38,27 +38,10 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
 
-                        ->arrayNode('flows')
-                            ->children()
-                                ->scalarNode('output')->defaultValue('%kernel.cache_dir%')->end()
-                                ->scalarNode('configuration_class')->defaultValue('Adadgio\GearBundle\NodeRed\Configuration\Configuration')->end()
-                                ->arrayNode('parameters')
-                                    ->prototype('scalar')->end()
-                                ->end()
-                            ->end()
-                        ->end()
-
-                        ->arrayNode('settings')
-                            ->children()
-                                ->arrayNode('adminAuth')
-                                    ->children()
-                                        ->scalarNode('username')->defaultValue(null)->end()
-                                        ->scalarNode('password')->defaultValue(null)->end()
-                                    ->end()
-                                ->end()
-                                //->prototype('scalar')->end()
-                            ->end()
-                        ->end()
+                        // "flows" configuration node
+                        ->append($this->setNodeRedFlowsConfiguration())
+                        // "settings" configuration node
+                        ->append($this->setNodeRedSettingsConfiguration())
 
                     ->end()
                 ->end()
@@ -75,7 +58,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('provider')->defaultValue(null)->end()
                                 ->scalarNode('user')->defaultValue(null)->end()
                                 ->scalarNode('password')->defaultValue(null)->end()
-                                
+
                                 ->arrayNode('clients')
                                     ->prototype('array')
                                         ->children()
@@ -112,5 +95,57 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         return $treeBuilder;
+    }
+
+    private function setNodeRedSettingsConfiguration()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('settings')->isRequired();
+
+        return $node
+            ->children()
+
+                ->integerNode('ui_port')->defaultValue(1880)->end()
+                ->arrayNode('admin_auth')
+                    ->children()
+                        ->scalarNode('type')->defaultValue('credentials')->end()
+                        ->arrayNode('users')
+                            ->prototype('array')
+                                ->children()
+                                    ->scalarNode('username')->defaultValue('demo')->end()
+                                    ->scalarNode('password')->defaultValue('dEm0')->end()
+                                    ->scalarNode('permissions')->defaultValue('*')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->scalarNode('flow_file')->defaultValue(null)->end()
+                ->scalarNode('user_dir')->defaultValue(null)->end()
+                ->scalarNode('nodes_dir')->defaultValue(null)->end()
+                ->arrayNode('http_node_auth')->treatNullLike(array())
+                    ->children()
+                        ->scalarNode('user')->defaultValue(null)->end()
+                        ->scalarNode('pass')->defaultValue(null)->end()
+                    ->end()
+                ->end()
+                ->scalarNode('http_admin_root')->defaultValue(false)->end()
+
+            ->end();
+    }
+
+    private function setNodeRedFlowsConfiguration()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('flows');
+
+        return $node
+            ->children()
+                ->scalarNode('output')->defaultValue('%kernel.cache_dir%')->end()
+                ->scalarNode('configuration_class')->defaultValue('Adadgio\GearBundle\NodeRed\Configuration\Configuration')->end()
+                ->arrayNode('parameters')
+                    ->prototype('scalar')->defaultValue(null)->end()
+                ->end()
+            ->end();
     }
 }

@@ -27,7 +27,7 @@ class NodeRedInstallCommand extends ContainerAwareCommand
             ->setDescription('Create NodeRed flows')
         ;
     }
-    
+
     /**
      * Execute command.
      */
@@ -35,9 +35,10 @@ class NodeRedInstallCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $this->builder = $container->get('adadgio_gear.nodered.flow_builder');
-
+        
         $this->builder
-            ->installFlows();
+            ->installFlows()
+            ->installSettings();
 
         // env vars need to be set:
         // SYMFONY__HTTP__PROTOCOL = "http.protocol"

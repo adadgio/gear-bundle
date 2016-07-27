@@ -26,8 +26,7 @@ new Adadgio\GearBundle\AdadgioGearBundle();
 4. [CSV reader](#csv-reader)
 5. [Entity hydration from data](#entity-hydration)
 6. [Serializer](#serializer)
-
-
+7. [Others]
 
 ## <a name="api"></a>Api annotations and auth
 
@@ -48,7 +47,7 @@ adadgio_gear:
 # in config.yml (custom service auth example, like API client in database)
 adadgio_gear:
     auth:
-        #type: ~        
+        #type: ~
         #class: ~       # either define "class" or "provider", ex. "Adadgio\GearBundle\Component\Api\Authenticatir\AuthProvider"
         provider: my_bundle.api.my_client_auth  # you create the service and define what to do: see "adadgio_gear.api.authenticator_example_service"
 ```
@@ -234,4 +233,13 @@ $entities = $em->getRepository('AppBundle:Product')->findAll();
 
 $serializer = $this->get('adadgio_gear.entity_serializer');
 $dataSerialized = $serializer->serialize($entitiesÂ);
+```
+
+# <a name="others"></a>Others
+
+Starting NodeRed with custom settings file in dev environment (with Ngrok in this case).
+
+```bash
+# start node red with custom settings and pm2 process manager
+pm2 start /usr/local/bin/node-red -- -v --settings=/Library/WebServer/home/symfony/360medical-v3/app/data/nodered/settings.js
 ```

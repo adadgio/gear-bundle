@@ -16,6 +16,10 @@ class FlowBuilder
         $this->locator = $locator;
     }
 
+    /**
+     *
+     * @return object \FlowBuilder
+     */
     public function installFlows()
     {
         // read flows from the config file
@@ -41,20 +45,70 @@ class FlowBuilder
             // set the tabs...
             $flowsArray = array_merge($flowsArray, $flow->getArray());
         }
-        
-        $this->saveFlowFile($flowsArray);
+
+        $bool = $this->saveFlowFile($flowsArray);
+        return $this;
     }
 
+
+
+    public function installSettings()
+    {
+        $configurationClassNamespace = $this->config['flows']['configuration_class'];
+        $configurationClass = $this->createConfigurationClass($configurationClassNamespace);
+
+        $settingDir = $this
+            ->locator
+            ->locate('@AdadgioGearBundle/Resources/nodered');
+
+        $settings = $configurationClass
+            ->configure()
+            ->getSettings();
+
+        $contents = $settings
+            ->injectConfig($this->config, $settingDir) // necessary for dynamic flows urls and index
+            ->parseSettings()
+            ->getContents();
+
+        $bool = $this->saveSettingsFile($contents);
+        return $this;
+    }
+
+    /**
+     * Create a configuration class that extends FlowConfiguration by reflection.
+     *
+     * @param  string Class namespace
+     * @return object \FlowConfigurationInterface
+     */
+    private function createConfigurationClass($namespace)
+    {
+        return (new \ReflectionClass($namespace))->newInstance();
+    }
+
+    /**
+     * Save a flow file in the output directory.
+     *
+     * @param  array
+     * @return boolean
+     */
     private function saveFlowFile(array $flows)
     {
         $output = $this->config['flows']['output'].'/flows.json';
         $contents = json_encode($flows);
-
+        
         return file_put_contents($output, $contents);
     }
 
-    private function createConfigurationClass($namespace)
+    /**
+     * Save a settings file in the output directory.
+     *
+     * @param  array
+     * @return boolean
+     */
+    private function saveSettingsFile($contents)
     {
-        return (new \ReflectionClass($namespace))->newInstance();
+        $output = $this->config['flows']['output'].'/settings.js';
+
+        return file_put_contents($output, $contents);
     }
 }

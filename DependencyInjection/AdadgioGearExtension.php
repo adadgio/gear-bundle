@@ -24,11 +24,12 @@ class AdadgioGearExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-
+        
+        //print_r($config);
         // set all bundle parameters from configuration values
         $this->setBundleParameters($container, $config);
     }
-    
+
     /**
      * Set container parameters
      *

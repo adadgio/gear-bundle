@@ -11,7 +11,7 @@ class Flow
     private $templatesPath;
     private $tab;
     private $flow;
-
+    
     /**
      * Class constructor.
      *
@@ -124,13 +124,9 @@ class Flow
      * @param string Tab name
      * @return object \Flow
      */
-    public function setTab($label)
+    public function setTab(Tab $tab)
     {
-        $this->tab = array(
-            'type'  => 'tab',
-            'id'    => self::createNodeId(),
-            'label' => $label,
-        );
+        $this->tab = $tab;
 
         return $this;
     }
@@ -145,14 +141,14 @@ class Flow
     private function attachToTab(array $flow)
     {
         if (null === $this->tab) { return $flow; }
-        
+
         // add the tab
-        array_unshift($flow, $this->tab);
+        array_unshift($flow, $this->tab->toArray());
 
         // replace the "z" property of all the nodes (they belong to the tab!)
         foreach ($flow as $i => $node) {
             if (!isset($node['z'])) { continue; }
-            $flow[$i]['z'] = $this->tab['id'];
+            $flow[$i]['z'] = $this->tab->getId();
         }
 
         return $flow;
