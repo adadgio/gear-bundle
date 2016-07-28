@@ -35,7 +35,7 @@ class NodeRedInstallCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $this->builder = $container->get('adadgio_gear.nodered.flow_builder');
-        
+
         $this->builder
             ->installFlows()
             ->installSettings();
@@ -48,6 +48,6 @@ class NodeRedInstallCommand extends ContainerAwareCommand
 
         // say something before dying
         $output->writeln('');
-        $output->writeln(sprintf('Flows were saved to <fg=green;options=bold></>'));
+        $output->writeln(sprintf('Flows were saved to <fg=green;options=bold>%s</>', '?'));
     }
 }

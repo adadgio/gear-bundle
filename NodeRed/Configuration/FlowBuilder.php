@@ -15,7 +15,20 @@ class FlowBuilder
         $this->config = $config;
         $this->locator = $locator;
     }
-    
+
+    /**
+     * Change default parameter for output dir.
+     *
+     * @param string New output directory for flows and settings.
+     * @return object \FlowBuilder
+     */
+    public function setOutput($dir)
+    {
+        $this->config['flows']['output'] = $dir;
+
+        return $this;
+    }
+
     /**
      *
      * @return object \FlowBuilder
