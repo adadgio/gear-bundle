@@ -9,7 +9,7 @@ class FlowBuilder
 {
     private $config;
     private $locator;
-
+    
     public function __construct(FileLocator $locator, array $config)
     {
         $this->config = $config;
