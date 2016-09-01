@@ -74,12 +74,12 @@ class Configuration implements ConfigurationInterface
 
                     ->end()
                 ->end()
-
-                ->arrayNode('serialization')->isRequired()
+                
+                ->arrayNode('serialization')
                     ->prototype('array')
                         ->children()
-                            ->scalarNode('class')->isRequired()->end()
-                            ->arrayNode('fields')->isRequired()->cannotBeEmpty()
+                            ->scalarNode('class')->defaultValue(null)->end()
+                            ->arrayNode('fields')
                                 ->prototype('array')
                                     ->children()
                                         ->scalarNode('type')->cannotBeEmpty()->defaultValue(null)->end()
@@ -101,7 +101,7 @@ class Configuration implements ConfigurationInterface
     {
         $builder = new TreeBuilder();
         $node = $builder->root('settings')->isRequired();
-        
+
         return $node
             ->children()
 
